@@ -173,6 +173,7 @@ $(".mod_btn_fin").click(function () {
     $('#mod1_juego').hide();
     $('#lbl_text_refi').show().doAnim('bounceInUp');
     $('#btn_infografia_fin').show().doAnim('bounceIn');
+    $("#audi23")[0].play();
 });
 
 $(".mod_btn_try").click(function () {
