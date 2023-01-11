@@ -68,7 +68,6 @@ function ctrl_slides() {
   $('#audi16')[0].pause();
   $(".slide_sini").hide();
   $("#slide_sini_" + numSlides).show();
-  console.log(numSlides);
   if (numSlides === 1 || numSlides === 12 || numSlides === 18) {
     $("#sini_Next").hide();
   } else if (numSlides === 9) {

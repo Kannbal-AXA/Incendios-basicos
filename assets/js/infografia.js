@@ -41,13 +41,13 @@ $('#mod1_juego').loadHTML('void.html');
 $('#btn_Volume').click(function () {
   if (flagMus === 0) {
     flagMus = 1;
-    $('#btn_Volume').attr('src', 'assets/img/icons/volume-up.svg');
+    $('#btn_Volume').attr('src', 'assets/img/on.png');
     $('#audBack')[0].play();
     $('#audBack2')[0].play();
     $('#audBack3')[0].play();
     $("#audBack")[0].volume = 0.3;
   } else if (flagMus === 1) {
-    $('#btn_Volume').attr('src', 'assets/img/icons/volume-mute.svg');
+    $('#btn_Volume').attr('src', 'assets/img/off.png');
     flagMus = 0;
     $('#audBack')[0].pause();
     $('#audBack2')[0].pause();
@@ -283,11 +283,15 @@ $('#btn_returnInfo').click(function () {
   $('#audBack')[0].pause();
   $('#audBack2')[0].pause();
   $('#audBack3')[0].pause();
-  $('#audGen')[0].play();
   $('#btn_VolumenIndex, #btn_AudLoc').removeClass('hide');
   resetLocutionInfo()
   numSlides = 15;
   ctrl_slides();
+  if (flagMusIndex === 1) {
+    $('#audGen')[0].play();
+  } else {
+    $('#audGen')[0].pause();
+  }
 });
 $('.btn_infografia_juego').click(function () {
   juego = true;
