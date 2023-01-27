@@ -111,28 +111,50 @@ function ctrl_slides() {
 }
 
 function unlock_menu() {
-  if (avSlide9 >= 2) {
-    $(".btn_navegacion").css({ "pointer-events": "auto" }).removeClass('w3-opacity');
-  } else {
-    if (numSlides === 10) {
-      $('#btn_nav_1,#txt_pregunta_1').css({ "pointer-events": "auto" }).removeClass('w3-opacity');
-      g_avance = 1;
-    } else if (numSlides === 16 && juego === false) {
-      $('#btn_nav_2,#txt_pregunta_2').css({ "pointer-events": "auto" }).removeClass('w3-opacity');
-      g_avance = 2;
-    } else if (numSlides === 16 && juego === true) {
-      $('#btn_nav_3,#txt_pregunta_3').css({ "pointer-events": "auto" }).removeClass('w3-opacity');
-      g_avance = 3;
-    } else if (numSlides === 17) {
-      $('#btn_nav_4,#txt_pregunta_4').css({ "pointer-events": "auto" }).removeClass('w3-opacity');
-      g_avance = 4;
-    } else if (numSlides === 20) {
-      $('#btn_nav_5,#txt_pregunta_5').css({ "pointer-events": "auto" }).removeClass('w3-opacity');
-      g_avance = 4;
-    }
-    save_Status();
+  $('.btn_navegacion').removeClass('btn_nav_activo');
+
+  //Del slide 10 al 15 se activa el primer elemento del menú
+  if (numSlides >= 10 && numSlides < 16) {
+    $('#btn_nav_1,#txt_pregunta_1').css({ "pointer-events": "auto" }).removeClass('w3-opacity');
+    $('#btn_nav_1').css({"background-color": "#a8ccff"});
+    $('#btn_nav_1').addClass('btn_nav_activo');
+    g_avance = 1;
+  //En el slide 16 se activa el segundo elemento del menú, si no se ha jugado el juego
+  } else if (numSlides === 16 && juego === false) {
+    $('#btn_nav_2,#txt_pregunta_2').css({ "pointer-events": "auto" }).removeClass('w3-opacity');
+    $('#btn_nav_2').css({"background-color": "#a8ccff"});
+    $('#btn_nav_2').addClass('btn_nav_activo');
+    g_avance = 2;
+  //En el slide 16 se activa el tercer elemento del menú, si ya se ha jugado el juego
+  } else if (numSlides === 16 && juego === true) {
+    $('#btn_nav_3,#txt_pregunta_3').css({ "pointer-events": "auto" }).removeClass('w3-opacity');
+    $('#btn_nav_3').css({"background-color": "#a8ccff"});
+    $('#btn_nav_3').addClass('btn_nav_activo');
+    g_avance = 3;
+  //Del slide 16 al 19 se activa el cuarto elemento del menú
+  } else if (numSlides > 16 && numSlides < 20) {
+    $('#btn_nav_4,#txt_pregunta_4').css({ "pointer-events": "auto" }).removeClass('w3-opacity');
+    $('#btn_nav_4').css({"background-color": "#a8ccff"});
+    $('#btn_nav_4').addClass('btn_nav_activo');
+    g_avance = 4;
+  //Desde el slide 20 se activa el quinto elemento del menú
+  } else if (numSlides >= 20) {
+    $('#btn_nav_5,#txt_pregunta_5').css({ "pointer-events": "auto" }).removeClass('w3-opacity');
+    $('#btn_nav_5').css({"background-color": "#a8ccff"});
+    $('#btn_nav_5').addClass('btn_nav_activo');
+    g_avance = 4;
   }
+  save_Status();
 }
+
+//Se resetea el estado del juego dependiendo de a qué opción del menú se le dé click
+$('#btn_nav_2, #txt_pregunta_2').click(() => {
+  juego = false;
+});
+$('#btn_nav_3, #txt_pregunta_3').click(() => {
+  juego = true;
+});
+
 
 $(".cls_info_intro").click(function () {
   $("#mod_info_intro").hide();
@@ -302,6 +324,7 @@ $('.btn_contInc').click(function () {
 
 $(".btn_navegacion").click(function () {
   $("#efct_clic")[0].play();
+  $('.modal').hide();
   // resetLocution();
   strID = $(this).attr("id").split("_")[2];
   "1" === strID && (numSlides = 10, $('#mod1_juego').hide().loadHTML('void.html'), $('html,body').css({ 'overflow-y': 'hidden' }));
@@ -324,28 +347,28 @@ function stopLocution2(e) {
 
 
 function resetLocution() {
-  console.log("entra reset");
+  //console.log("entra reset");
   var e = document.querySelectorAll(".locuIndex");
   [].forEach.call(e, function (e) {
     stopLocution(e);
   })
 }
 function resetLocutionSlide() {
-  console.log("entra reset");
+  //console.log("entra reset");
   var e = document.querySelectorAll(".locuIndex");
   [].forEach.call(e, function (e) {
     stopLocution2(e);
   })
 }
 function resetLocutionSabias() {
-  console.log("entra reset");
+  //console.log("entra reset");
   var e = document.querySelectorAll(".locuIndex");
   [].forEach.call(e, function (e) {
     stopLocution3(e);
   })
 }
 function playLocution(currentSlide) {
-  console.log("entra playLocution");
+  //console.log("entra playLocution");
   resetLocution();
   if (currentSlide == 10) {
     $("#aud1")[0].play();
@@ -387,7 +410,7 @@ function playLocution(currentSlide) {
 
 }
 function playLocutionCarrusel(currentSlide) {
-  console.log("entra playLocutionCarrusel");
+  //console.log("entra playLocutionCarrusel");
   resetLocutionSlide();
   if (currentSlide == 1) {
     $("#acar1")[0].play();
