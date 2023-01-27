@@ -153,13 +153,13 @@ body{height:100%;margin:0;background-color: #fff;}
   width: 13%;
   height: 6%;
   left: 12%;
-  background-color: #a8ccff;
+  background-color: #657ad1;
   border-style: solid;
   border-width: 2px;
   pointer-events: none;
 }
 .btn_nav_activo {
-  background-color: #A52A2A;
+  background-color: #A52A2A!important;
 }
 .btn_nav_func {
   background-color: #3d5c88;
