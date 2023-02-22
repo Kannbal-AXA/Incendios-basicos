@@ -263,11 +263,8 @@ function taller_showDivs2(n) {
 
   if (n == i) {
     $(".next_t").hide().removeClass('animated infinite heartBeat');
-    $('#audi16')[0].play();
   } else {
     $(".next_t").show();
-    $('#audi16')[0].pause();
-    $("#audi16")[0].currentTime = 0;
   }
   if (n == 1) {
     $(".prev_t").hide();
@@ -275,6 +272,16 @@ function taller_showDivs2(n) {
     $(".prev_t").show();
   }
 }
+
+$(".next_t").click(function(){
+  resetLocutionInfo();
+  $('#audi16')[0].play();
+})
+
+$(".prev_t").click(function(){
+  resetLocutionInfo();
+  $('#audi15')[0].play();
+})
 
 $('#btn_returnInfo').click(function () {
   $('html,body').css({ 'overflow-y': 'hidden' });
@@ -285,7 +292,7 @@ $('#btn_returnInfo').click(function () {
   $('#audBack3')[0].pause();
   $('#btn_VolumenIndex, #btn_AudLoc').removeClass('hide');
   resetLocutionInfo()
-  numSlides = 15;
+  numSlides = 14;
   ctrl_slides();
   if (flagMusIndex === 1) {
     $('#audGen')[0].play();

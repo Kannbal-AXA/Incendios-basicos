@@ -63,30 +63,34 @@ $(".da-clic").click(function () { $("#efct_clic")[0].play(); });
 $(".elem_close").click(function () { $("#efct_close")[0].play(); });
 
 function ctrl_slides() {
+  console.log(numSlides);
   $("#acar1")[0].pause();
   $("#acar1")[0].currentTime = 0;
   $('#audi16')[0].pause();
   $(".slide_sini").hide();
   $("#slide_sini_" + numSlides).show();
-  if (numSlides === 1 || numSlides === 12 || numSlides === 18) {
+  if (numSlides === 1) {
     $("#sini_Next").hide();
-  } else if (numSlides === 9) {
+    $("#sini_Prev").hide();
+  }else if(numSlides === 11 || numSlides === 17){
+    $("#sini_Next").hide();
+  } else if (numSlides === 8) {
     $("#sini_Prev").show();
     $("#sini_Next").hide();
   } else {
     $("#sini_Prev,#sini_Next").show();
     $("#slide10_text_1,#slide10_text_2,#slide10_text_3").hide();
     $("#slide10_text_4,#slide10_text_5").hide();
-    if (numSlides === 10) {
+    if (numSlides === 9) {      
       $(".btn_AudLoc").removeClass('hide')
     }
-    if (numSlides === 15) {
+    if (numSlides === 14) {
       $("#slide10_text_0").show().doAnim("zoomIn");
       $("#slide10_text_1").delay(800).fadeIn(0).doAnim({ 'animation': 'slideInRight', 'duration': 2 });
       $("#slide10_text_2").delay(1600).fadeIn(0).doAnim({ 'animation': 'slideInRight', 'duration': 2 });
       $('#slide10_text_next').show();
       $('#slide10_text_prev,#slide10_text_3,#slide10_text_4,#slide10_text_5').hide();
-    } else if (numSlides === 16) {
+    } else if (numSlides === 15) {
       resetLocution()
       $('.infografia_horizontal').show();
       $("#sini_Prev").hide();
@@ -94,15 +98,15 @@ function ctrl_slides() {
       $('#audGen')[0].pause();
       $('#btn_VolumenIndex, #btn_AudLoc').addClass('hide');
       $('html,body').css({ 'overflow-y': 'auto' });
-    } else if (numSlides === 19) {
+    } else if (numSlides === 18) {
       $("#sini_Prev,#sini_Next").show();
-    } else if (numSlides === 21) {
+    } else if (numSlides === 20) {
       $("#sini_Prev").show();
       $("#sini_Next").hide();
     }
   }
-  if (numSlides === 10 || numSlides === 11 || numSlides === 12 || numSlides === 13 || numSlides === 14 || numSlides === 15 ||
-    numSlides === 16  || numSlides === 17 || numSlides === 18 || numSlides === 19 || numSlides === 20 || numSlides === 21
+  if (numSlides === 1 || numSlides === 2 ||numSlides === 3 || numSlides === 4 ||numSlides === 5 || numSlides === 6 ||numSlides === 7 || numSlides === 9 || numSlides === 10 || numSlides === 11 || numSlides === 12 || numSlides === 13 || numSlides === 14 ||
+    numSlides === 15  || numSlides === 16 || numSlides === 17 || numSlides === 18 || numSlides === 19 || numSlides === 20
   ) {
     playLocution(numSlides)
   }
@@ -317,8 +321,13 @@ $("#cls_sabiasExperto").click(function () {
 $('.btn_contInc').click(function () {
   strId = $(this).attr("id").split("_")[2];
   if (strId === '1') {
-    numSlides = 10;
-    ctrl_slides();
+    $("#gifavion").show();
+    $("#aud_avion")[0].play();
+    setTimeout(function(){
+      $("#gifavion").hide();
+      numSlides = 9;
+      ctrl_slides();
+    },3000) 
   }
 });
 
@@ -368,42 +377,63 @@ function resetLocutionSabias() {
   })
 }
 function playLocution(currentSlide) {
-  //console.log("entra playLocution");
+  console.log("entra playLocution"+ currentSlide);
   resetLocution();
-  if (currentSlide == 10) {
+  if (currentSlide == 1) {
+    $("#aud_intro_1")[0].play();
+  }
+  if (currentSlide == 2) {
+    $("#aud_intro_2")[0].play();
+  }
+  if (currentSlide == 3) {
+    $("#aud_intro_3")[0].play();
+  }
+  if (currentSlide == 4) {
+    $("#aud_intro_4")[0].play();
+  }
+  if (currentSlide == 5) {
+    $("#aud_intro_5")[0].play();
+  }
+  if (currentSlide == 6) {
+    $("#aud_intro_6")[0].play();
+  }
+  if (currentSlide == 7) {
+    $("#aud_intro_7")[0].play();
+  }
+  if (currentSlide == 9) {
     $("#aud1")[0].play();
   }
-  if (currentSlide == 11) {
+  if (currentSlide == 10) {
     $("#aud2")[0].play();
   }
-  if (currentSlide == 12) {
+  if (currentSlide == 11) {
     $("#aud3")[0].play();
   }
-  if (currentSlide == 13) {
+  if (currentSlide == 12) {
     $("#aud4")[0].play();
   }
-  if (currentSlide == 14) {
+  if (currentSlide == 13) {
     $("#aud5")[0].play();
   }
-  if (currentSlide == 15) {
+  if (currentSlide == 14) {
     $("#aud6")[0].play();
   }
   // if (currentSlide == 16) {
   //   $("#aud7")[0].play();
   // }
-  if (currentSlide == 17) {
+  if (currentSlide == 16) {
     $("#aud7")[0].play();
   }
-  if (currentSlide == 18) {
+  if (currentSlide == 17) {
     $("#aud8")[0].play();
   }
-  if (currentSlide == 19) {
+  if (currentSlide == 18) {
     $("#aud9")[0].play();
   }
-  if (currentSlide == 20) {
+  if (currentSlide == 19) {
     $("#aud10")[0].play();
   }
-  if (currentSlide == 21) {
+  if (currentSlide == 20) {
     $("#aud11")[0].play();
   }
   
@@ -412,6 +442,7 @@ function playLocution(currentSlide) {
 function playLocutionCarrusel(currentSlide) {
   //console.log("entra playLocutionCarrusel");
   resetLocutionSlide();
+  resetLocution();
   if (currentSlide == 1) {
     $("#acar1")[0].play();
   }

@@ -90,19 +90,19 @@
 }
 .title_oficina_slide_5 {
   width: 45%;
-  top: 7%;
+  top: 5%;
   left: 0;
   right: 0;
   margin: auto;
 }
 .inteligente_slide_5 {
-  width: 15%;
+  width: 17%;
   right: 12%;
-  top: 28%;
+  bottom: 2%;
 }
 .experta_slide_5 {
   width: 40%;
-  top: 21%;
+  top: 17%;
   left: 10%;
 }
 .adelante_slide_6 {
@@ -495,9 +495,9 @@
   left: 15%;
 }
 .inginia_end {
-  width: 10%;
-  top: 35%;
-  left: 37%;
+  width: 14%;
+  top: 28%;
+  left: 36%;
 }
 .click_end {
   width: 35%;
@@ -511,29 +511,29 @@
 }
 .felicidades_s19 {
   width: 20%;
-  top: 10%;
+  top: 7%;
   left: 40%;
 }
 .obtuv_s19{
-  width: 30%;
-  left: 7%;
-  top: 25%;
+  width: 36%;
+  left: 32%;
+  top: 19%;
 }
 .insignia_19{
-  width: 10%;
-  left: 30%;
-  top: 40%;
+  width: 14%;
+  left: 43%;
+  top: 27%;
 }
 .demo_s19{
-  width: 50%;
-  left: 10%;
-  bottom: 5%;
+  width: 40%;
+  left: 30%;
+  top: 63%;
 }
 
 #btn_Finish{
   width: 15%;
-  left: 64%;
-  bottom: 5%;
+  left: 42%;
+  bottom: 2%;
 }
 
 #slide14_1 {
@@ -564,3 +564,6 @@
 #btn_contInc_2{left: 55.7%;pointer-events: none;}
 #btn_contInc_3{left: 68.2%;pointer-events: none;}
 #btn_contInc_4{left: 81%;pointer-events: none;}
+
+.gif_mochila{position: absolute;left: 6%;width: 38%;bottom: 0%;}
+.airplane{position: absolute;width: 90%;top: 0%;left: 5%;z-index: 9;}
