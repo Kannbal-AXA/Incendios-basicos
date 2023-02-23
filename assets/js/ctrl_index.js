@@ -78,11 +78,16 @@ function ctrl_slides() {
     $("#sini_Prev").show();
     $("#sini_Next").hide();
   } else {
+    $("#btn_VolumenIndex,#btn_AudLoc").show();
     $("#sini_Prev,#sini_Next").show();
     $("#slide10_text_1,#slide10_text_2,#slide10_text_3").hide();
     $("#slide10_text_4,#slide10_text_5").hide();
-    if (numSlides === 9) {      
-      $(".btn_AudLoc").removeClass('hide')
+    if (numSlides === 9) {
+      $(".btn_AudLoc").removeClass('hide');
+      setTimeout(function(){
+        $(".gif_mochila").show();
+      },14000);
+      
     }
     if (numSlides === 14) {
       $("#slide10_text_0").show().doAnim("zoomIn");

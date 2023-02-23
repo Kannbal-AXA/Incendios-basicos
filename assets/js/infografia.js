@@ -315,7 +315,7 @@ function stopLocution(e) {
 
 function resetLocutionInfo() {
   console.log("entra reset");
-  var e = document.querySelectorAll(".locution");
+  var e = document.querySelectorAll(".locuIndex");
   [].forEach.call(e, function (e) {
     stopLocution(e);
   })
