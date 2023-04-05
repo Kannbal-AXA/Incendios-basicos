@@ -258,6 +258,8 @@ body {
   color: white;
   pointer-events: none;
   background-color: #00abc6;
+  display: none;
+  
 }
 #mod_btn2_taller3,
 #mod_btn2_taller4 {

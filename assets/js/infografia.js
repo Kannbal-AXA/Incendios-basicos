@@ -412,7 +412,7 @@ function taller_showDivs2(n) {
   x[carousel_btn2_taller2 - 1].style.display = "block";
 
   if (n == i) {
-    $(".next_t").hide().removeClass('animated infinite heartBeat');
+    $(".next_t").hide();
   } else {
     $(".next_t").show();
   }

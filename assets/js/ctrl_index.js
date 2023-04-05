@@ -115,20 +115,21 @@ function ctrl_slides() {
       $("#audBack")[0].volume = 0.3;
     } else if (numSlides === 16) {
       $('#aud7')[0].play();
+      $('#audBack')[0].pause();
+      $('#audBack2')[0].pause();
+      $('#audBack3')[0].pause();
       if (poke === true) {
         $("#sini_Prev,#sini_Next").show().removeClass('hide');
       } else {
         $("#sini_Prev,#sini_Next").hide();
       }
     } else if (numSlides === 18) {
-      $("#sini_Prev,#sini_Next").show();
-    } else if (numSlides === 19) {
       $("#sini_Prev").show();
       $("#sini_Next").hide();
     }
   }
   if (numSlides === 1 || numSlides === 2 || numSlides === 3 || numSlides === 4 || numSlides === 5 || numSlides === 6 || numSlides === 7 || numSlides === 9 || numSlides === 10 || numSlides === 11 || numSlides === 12 || numSlides === 13 || numSlides === 14 ||
-    numSlides === 15 || numSlides === 16 || numSlides === 17 || numSlides === 18 || numSlides === 19
+    numSlides === 15 || numSlides === 16 || numSlides === 17 || numSlides === 18
   ) {
     playLocution(numSlides)
   }
@@ -160,6 +161,9 @@ function unlock_menu() {
     $('#btn_nav_3,#txt_pregunta_3').css({ "pointer-events": "auto" }).removeClass('w3-opacity');
     $('#btn_nav_3').css({ "background-color": "#a8ccff" });
     $('#btn_nav_3').addClass('btn_nav_activo');
+    $('#audBack')[0].pause();
+    $('#audBack2')[0].pause();
+    $('#audBack3')[0].pause();
 
     g_avance = 3;
     //Del slide 16 se activa cuarto elemento del menú
@@ -167,6 +171,16 @@ function unlock_menu() {
     $('#btn_nav_4,#txt_pregunta_4').css({ "pointer-events": "auto" }).removeClass('w3-opacity');
     $('#btn_nav_4').css({ "background-color": "#a8ccff" });
     $('#btn_nav_4').addClass('btn_nav_activo');
+    $('#audBack')[0].pause();
+    $('#audBack2')[0].pause();
+    $('#audBack3')[0].pause();
+    if (numSlides === 16) {
+      if (poke === true) {
+        $("#sini_Prev,#sini_Next").show().removeClass('hide');
+      } else {
+        $("#sini_Prev,#sini_Next").hide();
+      }
+    }
     g_avance = 4;
     //Desde el slide 20 se activa el quinto elemento del menú
   }
@@ -240,13 +254,18 @@ $("#btn_start_slide15").click(function () {
   resetLocution();
   playLocutionCarrusel(1)
   $("#btn_start_slide15").removeClass("myglow_img_blue");
+  numSlide1_2 = 1;
+  console.log('en Btn', numSlide1_2);
 });
 $("#cls_expertos_1").click(function () {
   $("#mod_expertos_1").hide();
+  numSlide1_2 = 1
+  ctrl_avanceExp()
   poke = true
   $("#sini_Prev,#sini_Next").show();
   resetLocutionSlide()
   resetLocution()
+  console.log('en CLs', numSlide1_2);
 });
 
 function ctrl_avanceExp() {
@@ -260,14 +279,20 @@ function ctrl_avanceExp() {
   } else if (numSlide1_2 === 7) {
     $("#slide1_2_Prev,#cls_expertos_1").show();
     $("#slide1_2_Next").hide();
+  } else if (numSlide1_2 === 0) { // add this block to show the first slide on reset
+    numSlide1_2 = 1;
+    $("#slide1_2_Prev").hide();
+    $("#slide1_2_Next").show();
+    $("#carru_slide1_2_1").show();
+    $('#circ_slide1_2_1').removeClass('w3-white').addClass('w3-light-blue');
   } else {
     $("#slide1_2_Prev,#slide1_2_Next").show();
   }
-  if (numSlide1_2 === 1 || numSlide1_2 === 2 || numSlide1_2 === 3 || numSlide1_2 === 4 || numSlide1_2 === 5 || numSlide1_2 === 6 || numSlide1_2 === 7
-  ) {
-    playLocutionCarrusel(numSlide1_2)
+  if (numSlide1_2 >= 1 && numSlide1_2 <= 7) {
+    playLocutionCarrusel(numSlide1_2);
   }
 }
+
 function ctrl_avance_slide9(ptrId) {
   if ((avSlide9 < 2) && (avSlide9 <= ptrId)) {
     avSlide9 = ptrId + 1;
@@ -359,10 +384,9 @@ $(".btn_navegacion").click(function () {
   // resetLocution();
   strID = $(this).attr("id").split("_")[2];
   "1" === strID && (numSlides = 10, $('#mod1_juego').hide().loadHTML('void.html'), $('html,body').css({ 'overflow-y': 'hidden' }));
-  "2" === strID && (numSlides = 16, $('#mod1_juego').hide().loadHTML('void.html'));
-  "3" === strID && (numSlides = 16, $('#mod1_juego').show().loadHTML('juego_1.html'));
+  "2" === strID && (numSlides = 15, $('#mod1_juego').hide().loadHTML('void.html'));
+  "3" === strID && (numSlides = 15, $('#mod1_juego').show().loadHTML('juego_1.html'));
   "4" === strID && (numSlides = 16, $('#mod1_juego').hide().loadHTML('void.html'), $('html,body').css({ 'overflow-y': 'hidden' }));
-  "5" === strID && (numSlides = 19, $('#mod1_juego').hide().loadHTML('void.html'), $('html,body').css({ 'overflow-y': 'hidden' }));
   ctrl_slides();
 });
 
@@ -444,11 +468,11 @@ function playLocution(currentSlide) {
     $("#aud8")[0].play();
   }
   if (currentSlide === 18) {
-    $("#aud9")[0].play();
-  }
-  if (currentSlide === 19) {
     $("#aud10")[0].play();
   }
+  // if (currentSlide === 19) {
+  //   $("#aud10")[0].play();
+  // }
 }
 function playLocutionCarrusel(currentSlide) {
   resetLocutionSlide();
