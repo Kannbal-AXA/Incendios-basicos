@@ -248,7 +248,7 @@ $(".da-clic").click(function () { $("#efct_clic")[0].play(); });
         // playLocutionInfog('b');
       } else if (percent >= 0.050 && flag2 === 0) {
         $('#lbl_MuseoT').show().doAnim('bounceIn');
-        $('#img_museo').show().doAnim({ 'animation': 'zoomIn', 'duration': 1 });
+        $('#img_museo, #capa_5__testo').show().doAnim({ 'animation': 'zoomIn', 'duration': 1 });
         flag2 = 1;
         // playLocutionInfog('c');
       } else if (percent >= 0.084 && flag3 === 0) {
@@ -382,7 +382,7 @@ $("#cls_mod7_taller4_btn2").click(() => {
 });
 // Carousel
 var carousel_btn2_taller2 = 1;
-$("#efct_next")[0].play();
+// $("#efct_next")[0].play();
 taller_showDivs2(carousel_btn2_taller2);
 
 function taller_plusDivs2(n) {

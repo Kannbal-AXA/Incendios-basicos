@@ -1,7 +1,7 @@
 var scorm = pipwerks.SCORM;
 lmsConnected = scorm.init();
 var g_avance = 1;
-const g_avMax = 8;
+const g_avMax = 4;
 //Control Scorm
 function init_Course() {
   if (lmsConnected) {

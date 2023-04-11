@@ -2,11 +2,12 @@ var avsExpert = 0, avSlide8 = 0, avSlide9 = 0, avSlide1 = 0;
 var numSlides = 1, numSlide9_1 = 1, numSlide9_2 = 1, numSlide1_2 = 1;
 var flagPiso3Finish = false;
 var finishSlide12_1 = false;
-var sabias = 0
+var sabias = 0;
 var flagMusIndex = 1;
-var juego = false
-let cb = false
-let poke = false
+var juego = false;
+let cb = false;
+let poke = false;
+$("#acar1")[0].pause();
 $("#precache_index").waitForImages({
   finished: function () {
     $("#loading_screen").fadeOut("slow");
@@ -18,6 +19,7 @@ $("#precache_index").waitForImages({
     $('#btn_openSide').show();
     $("#acar1")[0].pause();
     $("#acar1")[0].currentTime = 0;
+    $('#audi16')[0].pause();
   },
   waitForAll: true
 });
@@ -62,21 +64,22 @@ $('#close_sideBar').click(() => $("#mySidebar").css({ width: "0%" }));
 
 
 $(".elem_click").click(function () { $("#efct_clic")[0].play(); });
-$(".da-clic").click(function () { $("#efct_clic")[0].play(); });
+$(".da-clic").click(function () {
+  $("#efct_clic")[0].play();
+});
 $(".elem_close").click(function () { $("#efct_close")[0].play(); });
 
 function ctrl_slides() {
-  console.log(numSlides);
-  $("#acar1")[0].pause();
-  $("#acar1")[0].currentTime = 0;
-  $('#audi16')[0].pause();
+  console.log('numSlides: ', numSlides);
   $(".slide_sini").hide();
   $("#slide_sini_" + numSlides).show();
   if (numSlides === 1) {
     $("#sini_Next").hide();
     $("#sini_Prev").hide();
+    playLocution(numSlides);
   } else if (numSlides === 11) {
     $("#sini_Next").hide();
+    playLocution(numSlides);
   } else if (numSlides === 8) {
     $("#sini_Prev").show();
     $("#sini_Next").hide();
@@ -90,7 +93,7 @@ function ctrl_slides() {
       setTimeout(function () {
         $(".gif_mochila").show();
       }, 14000);
-
+      playLocution(numSlides);
     }
     if (numSlides === 14) {
       $("#slide10_text_0").show().doAnim("zoomIn");
@@ -98,9 +101,10 @@ function ctrl_slides() {
       $("#slide10_text_2").delay(1600).fadeIn(0).doAnim({ 'animation': 'slideInRight', 'duration': 2 });
       $('#slide10_text_next').show();
       $('#slide10_text_prev,#slide10_text_3,#slide10_text_4,#slide10_text_5').hide();
+      playLocution(numSlides);
     } else if (numSlides === 15) {
-      cb = true
-      resetLocution()
+      cb = true;
+      resetLocution();
       $('.infografia_horizontal').show();
       $("#sini_Prev").hide();
       $("#sini_Next").hide();
@@ -113,6 +117,7 @@ function ctrl_slides() {
       $('#audBack2')[0].play();
       $('#audBack3')[0].play();
       $("#audBack")[0].volume = 0.3;
+      playLocution(numSlides);
     } else if (numSlides === 16) {
       $('#aud7')[0].play();
       $('#audBack')[0].pause();
@@ -123,18 +128,23 @@ function ctrl_slides() {
       } else {
         $("#sini_Prev,#sini_Next").hide();
       }
+      playLocution(numSlides);
     } else if (numSlides === 18) {
       $("#sini_Prev").show();
       $("#sini_Next").hide();
+      playLocution(numSlides);
     }
   }
-  if (numSlides === 1 || numSlides === 2 || numSlides === 3 || numSlides === 4 || numSlides === 5 || numSlides === 6 || numSlides === 7 || numSlides === 9 || numSlides === 10 || numSlides === 11 || numSlides === 12 || numSlides === 13 || numSlides === 14 ||
-    numSlides === 15 || numSlides === 16 || numSlides === 17 || numSlides === 18
+  unlock_menu();
+  if (numSlides === 2 || numSlides === 3 ||
+      numSlides === 4 || numSlides === 5 ||
+      numSlides === 6 || numSlides === 7 ||
+      numSlides === 10 || numSlides === 12 ||
+      numSlides === 13 || numSlides === 17
   ) {
-    playLocution(numSlides)
+    playLocution(numSlides);
   }
 
-  unlock_menu();
 }
 
 function unlock_menu() {
@@ -147,16 +157,14 @@ function unlock_menu() {
     $('#audBack')[0].pause();
     $('#audBack2')[0].pause();
     $('#audBack3')[0].pause();
-
     g_avance = 1;
-    //En el slide 16 se activa el segundo elemento del menú, si no se ha jugado el juego
+    //En el slide 15 se activa el segundo elemento del menú, si no se ha jugado el juego
   } else if (numSlides >= 15 && juego === false) {
     $('#btn_nav_2,#txt_pregunta_2').css({ "pointer-events": "auto" }).removeClass('w3-opacity');
     $('#btn_nav_2').css({ "background-color": "#a8ccff" });
     $('#btn_nav_2').addClass('btn_nav_activo');
-
     g_avance = 2;
-    //En el slide 16 se activa el tercer elemento del menú, si ya se ha jugado el juego
+    //En el slide 15 se activa el tercer elemento del menú, si ya se ha jugado el juego
   } else if (numSlides === 15 && juego === true && juego < 16) {
     $('#btn_nav_3,#txt_pregunta_3').css({ "pointer-events": "auto" }).removeClass('w3-opacity');
     $('#btn_nav_3').css({ "background-color": "#a8ccff" });
@@ -164,7 +172,6 @@ function unlock_menu() {
     $('#audBack')[0].pause();
     $('#audBack2')[0].pause();
     $('#audBack3')[0].pause();
-
     g_avance = 3;
     //Del slide 16 se activa cuarto elemento del menú
   } else if (numSlides >= 16) {
@@ -174,6 +181,7 @@ function unlock_menu() {
     $('#audBack')[0].pause();
     $('#audBack2')[0].pause();
     $('#audBack3')[0].pause();
+    g_avance = 4;
     if (numSlides === 16) {
       if (poke === true) {
         $("#sini_Prev,#sini_Next").show().removeClass('hide');
@@ -181,8 +189,6 @@ function unlock_menu() {
         $("#sini_Prev,#sini_Next").hide();
       }
     }
-    g_avance = 4;
-    //Desde el slide 20 se activa el quinto elemento del menú
   }
   save_Status();
 }
@@ -236,6 +242,7 @@ $('#btn_start_sini1').click(function () {
 
 
 $('#btn_infografia_fin').click(function () {
+  window.scrollTo(0, 0);
   $('html,body').css({ 'overflow-y': 'hidden' });
   $('#audBack')[0].pause();
   $('#audBack2')[0].pause();
@@ -245,26 +252,23 @@ $('#btn_infografia_fin').click(function () {
   $("#audi23")[0].currentTime = 0;
   numSlides = 16;
   ctrl_slides();
-  unlock_menu()
-  window.scrollTo(0, 0);
 });
 
 $("#btn_start_slide15").click(function () {
   $("#mod_expertos_1").show();
   resetLocution();
-  playLocutionCarrusel(1)
+  playLocutionCarrusel(1);
   $("#btn_start_slide15").removeClass("myglow_img_blue");
   numSlide1_2 = 1;
-  console.log('en Btn', numSlide1_2);
 });
 $("#cls_expertos_1").click(function () {
   $("#mod_expertos_1").hide();
-  numSlide1_2 = 1
-  ctrl_avanceExp()
-  poke = true
+  numSlide1_2 = 1;
+  ctrl_avanceExp();
+  poke = true;
   $("#sini_Prev,#sini_Next").show();
-  resetLocutionSlide()
-  resetLocution()
+  resetLocutionSlide();
+  resetLocution();
   console.log('en CLs', numSlide1_2);
 });
 
@@ -361,7 +365,7 @@ $("#btn_sabiasExp").click(function () {
 });
 $("#cls_sabiasExperto").click(function () {
   $('#sabias_expertos_1').hide();
-  $("#sab1")[0].pause()
+  $("#sab1")[0].pause();
 });
 
 //Cambiar para despues implementar carga de módulos
@@ -374,7 +378,7 @@ $('.btn_contInc').click(function () {
       $("#gifavion").hide();
       numSlides = 9;
       ctrl_slides();
-    }, 3000)
+    }, 3000);
   }
 });
 
@@ -388,6 +392,10 @@ $(".btn_navegacion").click(function () {
   "3" === strID && (numSlides = 15, $('#mod1_juego').show().loadHTML('juego_1.html'));
   "4" === strID && (numSlides = 16, $('#mod1_juego').hide().loadHTML('void.html'), $('html,body').css({ 'overflow-y': 'hidden' }));
   ctrl_slides();
+});
+$('#btn_Finish').click(function () {
+  setComplete();
+  exit_lms();
 });
 
 //Lucutar
@@ -405,22 +413,21 @@ function resetLocution() {
   var e = document.querySelectorAll(".locuIndex");
   [].forEach.call(e, function (e) {
     stopLocution(e);
-  })
+  });
 }
 function resetLocutionSlide() {
   var e = document.querySelectorAll(".locuIndex");
   [].forEach.call(e, function (e) {
     stopLocution2(e);
-  })
+  });
 }
 function resetLocutionSabias() {
   var e = document.querySelectorAll(".locuIndex");
   [].forEach.call(e, function (e) {
     stopLocution3(e);
-  })
+  });
 }
 function playLocution(currentSlide) {
-  // console.log("entra playLocution" + currentSlide);
   resetLocution();
   if (currentSlide === 1) {
     $("#aud_intro_1")[0].play();

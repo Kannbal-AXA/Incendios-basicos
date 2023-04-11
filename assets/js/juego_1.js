@@ -169,9 +169,9 @@ function nextQuestion(question, time) {
 $(".mod_btn_fin").click(function () {
     $('#mod1_juego').loadHTML('void.html');
     $('#mod1_juego').hide();
-    $('#lbl_text_refi').show().doAnim('bounceInUp');
-    $('#btn_infografia_fin').show().doAnim('bounceIn');
-    $("#audi23")[0].play();
+    // $('#lbl_text_refi').show().doAnim('bounceInUp');
+    $('#btn_infografia_fin').show().doAnim('animated infinite bounceIn');
+    // $("#audi23")[0].play();
 });
 
 $(".mod_btn_try").click(function () {
@@ -182,13 +182,3 @@ $(".mod_btn_clo").click(function () {
     $('#mod1_juego').loadHTML('void.html');
     $('#mod1_juego').hide();
 });
-
-
-
-// $('.btn__juego-instrucciones').click(function () {
-//     $(".modal__juego-container").show();
-// })
-
-// $('.btn__juego-instrucciones_cerrar').click(function () {
-//     $(".modal__juego-container").hide();
-// })
