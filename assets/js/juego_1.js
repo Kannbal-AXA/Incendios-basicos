@@ -139,8 +139,8 @@ function validar_respuesta(param) {
             $("#aud_win")[0].play();
             $(".s2_p5_e2").hide();
             $("#" + question + "_" + answer_selected).attr("src", "assets/img/parte_1/juego/Pregunta-5/" + answer_selected + "_bien.png");
-            $("#" + question + "_" + "op2").attr("src", "assets/img/parte_1/juego/Pregunta-3/" + "op2" + "_mal.png");
-            $("#" + question + "_" + "op3").attr("src", "assets/img/parte_1/juego/Pregunta-3/" + "op3" + "_mal.png");
+            $("#" + question + "_" + "op2").attr("src", "assets/img/parte_1/juego/Pregunta-5/" + "op2" + "_mal.png");
+            $("#" + question + "_" + "op3").attr("src", "assets/img/parte_1/juego/Pregunta-5/" + "op3" + "_mal.png");
             nextQuestion(5, 2000);
         } else {
             $("#mod_" + question + "_bad").show();

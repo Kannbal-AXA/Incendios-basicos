@@ -137,10 +137,10 @@ function ctrl_slides() {
   }
   unlock_menu();
   if (numSlides === 2 || numSlides === 3 ||
-      numSlides === 4 || numSlides === 5 ||
-      numSlides === 6 || numSlides === 7 ||
-      numSlides === 10 || numSlides === 12 ||
-      numSlides === 13 || numSlides === 17
+    numSlides === 4 || numSlides === 5 ||
+    numSlides === 6 || numSlides === 7 ||
+    numSlides === 10 || numSlides === 12 ||
+    numSlides === 13 || numSlides === 17
   ) {
     playLocution(numSlides);
   }
@@ -228,7 +228,11 @@ $('.video_slide_7').click(function () {
     $('#mod_cultOrg').hide();
     $('#vid_cultOrg').get(0).pause();
     $('#sini_Prev,#sini_Next').show();
-    $('#audGen')[0].play();
+    if (flagMusIndex === 1) {
+      $('#audGen')[0].play();
+    } else {
+      $('#audGen')[0].pause();
+    }
   });
 });
 
