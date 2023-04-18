@@ -150,7 +150,7 @@ function ctrl_slides() {
 function unlock_menu() {
   $('.btn_navegacion').removeClass('btn_nav_activo');
   //Del slide 10 al 15 se activa el primer elemento del menú
-  if (numSlides >= 10 && numSlides < 15) {
+  if (numSlides >= 11 && numSlides < 15) {
     $('#btn_nav_1,#txt_pregunta_1').css({ "pointer-events": "auto" }).removeClass('w3-opacity');
     $('#btn_nav_1').css({ "background-color": "#a8ccff" });
     $('#btn_nav_1').addClass('btn_nav_activo');
@@ -391,7 +391,7 @@ $(".btn_navegacion").click(function () {
   $('.modal').hide();
   // resetLocution();
   strID = $(this).attr("id").split("_")[2];
-  "1" === strID && (numSlides = 10, $('#mod1_juego').hide().loadHTML('void.html'), $('html,body').css({ 'overflow-y': 'hidden' }));
+  "1" === strID && (numSlides = 11, $('#mod1_juego').hide().loadHTML('void.html'), $('html,body').css({ 'overflow-y': 'hidden' }));
   "2" === strID && (numSlides = 15, $('#mod1_juego').hide().loadHTML('void.html'));
   "3" === strID && (numSlides = 15, $('#mod1_juego').show().loadHTML('juego_1.html'));
   "4" === strID && (numSlides = 16, $('#mod1_juego').hide().loadHTML('void.html'), $('html,body').css({ 'overflow-y': 'hidden' }));
