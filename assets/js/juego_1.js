@@ -11,7 +11,7 @@ $(".s1_e3").click(function () {
     $(".s3").show();
     $(".preg1").show();
 });
-$(".da-clic").click(function(){ $("#efct_clic")[0].play(); });
+$(".da-clic").click(function () { $("#efct_clic")[0].play(); });
 //Contador
 function paddedFormat(num) {
     return num < 10 ? "0" + num : num;
@@ -29,7 +29,6 @@ function startCountDown(duration, element) {
         secondsRemaining = secondsRemaining - 1;
         if (secondsRemaining < 0) {
             clearInterval(countInterval);
-            console.log("termino conteo");
             if (!firsttime_game2) {
                 firsttime_game2 = true;
                 $("#mod_repeat").show();
@@ -47,7 +46,6 @@ $(".info").click(function () {
 });
 
 function removeAnim(param) {
-    console.log("entra remove");
     $(".s2_p" + param + "_op1").removeClass("animated");
     $(".s2_p" + param + "_op2").removeClass("animated");
     $(".s2_p" + param + "_op3").removeClass("animated");
@@ -76,7 +74,7 @@ function validar_respuesta(param) {
             $("#mod_p1_bad").show();
             $(".s2_p1_e2").hide();
             $("#" + question + "_" + answer_selected).attr("src", "assets/img/parte_1/juego/pregunta-1/" + answer_selected + "_mal.png");
-            nextQuestion(1, 2000);
+            // nextQuestion(1, 5000);
         }
     }
 
@@ -94,7 +92,7 @@ function validar_respuesta(param) {
             $('#aud_error').get(0).play();
             $(".s2_p2_e2").hide();
             $("#" + question + "_" + answer_selected).attr("src", "assets/img/parte_1/juego/Pregunta-2/" + answer_selected + "_mal.png");
-            nextQuestion(2, 2000);
+            // nextQuestion(2, 5000);
         }
     }
 
@@ -112,7 +110,7 @@ function validar_respuesta(param) {
             $('#aud_error').get(0).play();
             $(".s2_p3_e2").hide();
             $("#" + question + "_" + answer_selected).attr("src", "assets/img/parte_1/juego/Pregunta-3/" + answer_selected + "_mal.png");
-            nextQuestion(3, 2000);
+            // nextQuestion(3, 5000);
         }
     }
 
@@ -130,7 +128,7 @@ function validar_respuesta(param) {
             $('#aud_error').get(0).play();
             $(".s2_p4_e2").hide();
             $("#" + question + "_" + answer_selected).attr("src", "assets/img/parte_1/juego/Pregunta-4/" + answer_selected + "_mal.png");
-            nextQuestion(4, 2000);
+            // nextQuestion(4, 5000);
 
         }
     }
@@ -141,15 +139,15 @@ function validar_respuesta(param) {
             $("#aud_win")[0].play();
             $(".s2_p5_e2").hide();
             $("#" + question + "_" + answer_selected).attr("src", "assets/img/parte_1/juego/Pregunta-5/" + answer_selected + "_bien.png");
-            $("#" + question + "_" + "op2").attr("src", "assets/img/parte_1/juego/Pregunta-3/" + "op2" + "_mal.png");
-            $("#" + question + "_" + "op3").attr("src", "assets/img/parte_1/juego/Pregunta-3/" + "op3" + "_mal.png");
+            $("#" + question + "_" + "op2").attr("src", "assets/img/parte_1/juego/Pregunta-5/" + "op2" + "_mal.png");
+            $("#" + question + "_" + "op3").attr("src", "assets/img/parte_1/juego/Pregunta-5/" + "op3" + "_mal.png");
             nextQuestion(5, 2000);
         } else {
             $("#mod_" + question + "_bad").show();
             $('#aud_error').get(0).play();
             $(".s2_p5_e2").hide();
             $("#" + question + "_" + answer_selected).attr("src", "assets/img/parte_1/juego/Pregunta-5/" + answer_selected + "_mal.png");
-            nextQuestion(5, 2000);
+            // nextQuestion(5, 5000);
         }
     }
 }
@@ -171,9 +169,9 @@ function nextQuestion(question, time) {
 $(".mod_btn_fin").click(function () {
     $('#mod1_juego').loadHTML('void.html');
     $('#mod1_juego').hide();
-    $('#lbl_text_refi').show().doAnim('bounceInUp');
-    $('#btn_infografia_fin').show().doAnim('bounceIn');
-    $("#audi23")[0].play();
+    // $('#lbl_text_refi').show().doAnim('bounceInUp');
+    $('#btn_infografia_fin').show().doAnim('animated infinite bounceIn');
+    // $("#audi23")[0].play();
 });
 
 $(".mod_btn_try").click(function () {
@@ -184,13 +182,3 @@ $(".mod_btn_clo").click(function () {
     $('#mod1_juego').loadHTML('void.html');
     $('#mod1_juego').hide();
 });
-
-
-
-// $('.btn__juego-instrucciones').click(function () {
-//     $(".modal__juego-container").show();
-// })
-
-// $('.btn__juego-instrucciones_cerrar').click(function () {
-//     $(".modal__juego-container").hide();
-// })

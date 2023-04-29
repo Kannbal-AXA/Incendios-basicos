@@ -2,8 +2,12 @@ var avsExpert = 0, avSlide8 = 0, avSlide9 = 0, avSlide1 = 0;
 var numSlides = 1, numSlide9_1 = 1, numSlide9_2 = 1, numSlide1_2 = 1;
 var flagPiso3Finish = false;
 var finishSlide12_1 = false;
-var sabias = 0
+var sabias = 0;
 var flagMusIndex = 1;
+var juego = false;
+let cb = false;
+let poke = false;
+$("#acar1")[0].pause();
 $("#precache_index").waitForImages({
   finished: function () {
     $("#loading_screen").fadeOut("slow");
@@ -15,6 +19,7 @@ $("#precache_index").waitForImages({
     $('#btn_openSide').show();
     $("#acar1")[0].pause();
     $("#acar1")[0].currentTime = 0;
+    $('#audi16')[0].pause();
   },
   waitForAll: true
 });
@@ -59,21 +64,22 @@ $('#close_sideBar').click(() => $("#mySidebar").css({ width: "0%" }));
 
 
 $(".elem_click").click(function () { $("#efct_clic")[0].play(); });
-$(".da-clic").click(function () { $("#efct_clic")[0].play(); });
+$(".da-clic").click(function () {
+  $("#efct_clic")[0].play();
+});
 $(".elem_close").click(function () { $("#efct_close")[0].play(); });
 
 function ctrl_slides() {
-  console.log(numSlides);
-  $("#acar1")[0].pause();
-  $("#acar1")[0].currentTime = 0;
-  $('#audi16')[0].pause();
+  console.log('numSlides: ', numSlides);
   $(".slide_sini").hide();
   $("#slide_sini_" + numSlides).show();
   if (numSlides === 1) {
     $("#sini_Next").hide();
     $("#sini_Prev").hide();
-  }else if(numSlides === 11 || numSlides === 17){
+    playLocution(numSlides);
+  } else if (numSlides === 11) {
     $("#sini_Next").hide();
+    playLocution(numSlides);
   } else if (numSlides === 8) {
     $("#sini_Prev").show();
     $("#sini_Next").hide();
@@ -84,10 +90,10 @@ function ctrl_slides() {
     $("#slide10_text_4,#slide10_text_5").hide();
     if (numSlides === 9) {
       $(".btn_AudLoc").removeClass('hide');
-      setTimeout(function(){
+      setTimeout(function () {
         $(".gif_mochila").show();
-      },14000);
-      
+      }, 14000);
+      playLocution(numSlides);
     }
     if (numSlides === 14) {
       $("#slide10_text_0").show().doAnim("zoomIn");
@@ -95,63 +101,94 @@ function ctrl_slides() {
       $("#slide10_text_2").delay(1600).fadeIn(0).doAnim({ 'animation': 'slideInRight', 'duration': 2 });
       $('#slide10_text_next').show();
       $('#slide10_text_prev,#slide10_text_3,#slide10_text_4,#slide10_text_5').hide();
+      playLocution(numSlides);
     } else if (numSlides === 15) {
-      resetLocution()
+      cb = true;
+      resetLocution();
       $('.infografia_horizontal').show();
       $("#sini_Prev").hide();
       $("#sini_Next").hide();
       $('#audGen')[0].pause();
       $('#btn_VolumenIndex, #btn_AudLoc').addClass('hide');
+      $('#btn_VolumenIndex').addClass('hide').hide();
+      $('#btn_Volume, #locution_btn').removeClass('hide').show();
       $('html,body').css({ 'overflow-y': 'auto' });
+      $('#audBack')[0].play();
+      $('#audBack2')[0].play();
+      $('#audBack3')[0].play();
+      $("#audBack")[0].volume = 0.3;
+      playLocution(numSlides);
+    } else if (numSlides === 16) {
+      $('#aud7')[0].play();
+      $('#audBack')[0].pause();
+      $('#audBack2')[0].pause();
+      $('#audBack3')[0].pause();
+      if (poke === true) {
+        $("#sini_Prev,#sini_Next").show().removeClass('hide');
+      } else {
+        $("#sini_Prev,#sini_Next").hide();
+      }
+      playLocution(numSlides);
     } else if (numSlides === 18) {
-      $("#sini_Prev,#sini_Next").show();
-    } else if (numSlides === 20) {
       $("#sini_Prev").show();
       $("#sini_Next").hide();
+      playLocution(numSlides);
     }
   }
-  if (numSlides === 1 || numSlides === 2 ||numSlides === 3 || numSlides === 4 ||numSlides === 5 || numSlides === 6 ||numSlides === 7 || numSlides === 9 || numSlides === 10 || numSlides === 11 || numSlides === 12 || numSlides === 13 || numSlides === 14 ||
-    numSlides === 15  || numSlides === 16 || numSlides === 17 || numSlides === 18 || numSlides === 19 || numSlides === 20
+  unlock_menu();
+  if (numSlides === 2 || numSlides === 3 ||
+    numSlides === 4 || numSlides === 5 ||
+    numSlides === 6 || numSlides === 7 ||
+    numSlides === 10 || numSlides === 12 ||
+    numSlides === 13 || numSlides === 17
   ) {
-    playLocution(numSlides)
+    playLocution(numSlides);
   }
 
-  unlock_menu();
 }
 
 function unlock_menu() {
   $('.btn_navegacion').removeClass('btn_nav_activo');
-
   //Del slide 10 al 15 se activa el primer elemento del menú
-  if (numSlides >= 10 && numSlides < 16) {
+  if (numSlides >= 11 && numSlides < 15) {
     $('#btn_nav_1,#txt_pregunta_1').css({ "pointer-events": "auto" }).removeClass('w3-opacity');
-    $('#btn_nav_1').css({"background-color": "#a8ccff"});
+    $('#btn_nav_1').css({ "background-color": "#a8ccff" });
     $('#btn_nav_1').addClass('btn_nav_activo');
+    $('#audBack')[0].pause();
+    $('#audBack2')[0].pause();
+    $('#audBack3')[0].pause();
     g_avance = 1;
-  //En el slide 16 se activa el segundo elemento del menú, si no se ha jugado el juego
-  } else if (numSlides === 16 && juego === false) {
+    //En el slide 15 se activa el segundo elemento del menú, si no se ha jugado el juego
+  } else if (numSlides >= 15 && juego === false) {
     $('#btn_nav_2,#txt_pregunta_2').css({ "pointer-events": "auto" }).removeClass('w3-opacity');
-    $('#btn_nav_2').css({"background-color": "#a8ccff"});
+    $('#btn_nav_2').css({ "background-color": "#a8ccff" });
     $('#btn_nav_2').addClass('btn_nav_activo');
     g_avance = 2;
-  //En el slide 16 se activa el tercer elemento del menú, si ya se ha jugado el juego
-  } else if (numSlides === 16 && juego === true) {
+    //En el slide 15 se activa el tercer elemento del menú, si ya se ha jugado el juego
+  } else if (numSlides === 15 && juego === true && juego < 16) {
     $('#btn_nav_3,#txt_pregunta_3').css({ "pointer-events": "auto" }).removeClass('w3-opacity');
-    $('#btn_nav_3').css({"background-color": "#a8ccff"});
+    $('#btn_nav_3').css({ "background-color": "#a8ccff" });
     $('#btn_nav_3').addClass('btn_nav_activo');
+    $('#audBack')[0].pause();
+    $('#audBack2')[0].pause();
+    $('#audBack3')[0].pause();
     g_avance = 3;
-  //Del slide 16 al 19 se activa el cuarto elemento del menú
-  } else if (numSlides > 16 && numSlides < 20) {
+    //Del slide 16 se activa cuarto elemento del menú
+  } else if (numSlides >= 16) {
     $('#btn_nav_4,#txt_pregunta_4').css({ "pointer-events": "auto" }).removeClass('w3-opacity');
-    $('#btn_nav_4').css({"background-color": "#a8ccff"});
+    $('#btn_nav_4').css({ "background-color": "#a8ccff" });
     $('#btn_nav_4').addClass('btn_nav_activo');
+    $('#audBack')[0].pause();
+    $('#audBack2')[0].pause();
+    $('#audBack3')[0].pause();
     g_avance = 4;
-  //Desde el slide 20 se activa el quinto elemento del menú
-  } else if (numSlides >= 20) {
-    $('#btn_nav_5,#txt_pregunta_5').css({ "pointer-events": "auto" }).removeClass('w3-opacity');
-    $('#btn_nav_5').css({"background-color": "#a8ccff"});
-    $('#btn_nav_5').addClass('btn_nav_activo');
-    g_avance = 4;
+    if (numSlides === 16) {
+      if (poke === true) {
+        $("#sini_Prev,#sini_Next").show().removeClass('hide');
+      } else {
+        $("#sini_Prev,#sini_Next").hide();
+      }
+    }
   }
   save_Status();
 }
@@ -191,7 +228,11 @@ $('.video_slide_7').click(function () {
     $('#mod_cultOrg').hide();
     $('#vid_cultOrg').get(0).pause();
     $('#sini_Prev,#sini_Next').show();
-    $('#audGen')[0].play();
+    if (flagMusIndex === 1) {
+      $('#audGen')[0].play();
+    } else {
+      $('#audGen')[0].pause();
+    }
   });
 });
 
@@ -205,31 +246,34 @@ $('#btn_start_sini1').click(function () {
 
 
 $('#btn_infografia_fin').click(function () {
+  window.scrollTo(0, 0);
   $('html,body').css({ 'overflow-y': 'hidden' });
   $('#audBack')[0].pause();
   $('#audBack2')[0].pause();
   $('#audBack3')[0].pause();
   $('#infografia_horizontal').hide();
-  numSlides = 17;
-  ctrl_slides();
-  window.scrollTo(0, 0);
   $("#audi23")[0].pause();
   $("#audi23")[0].currentTime = 0;
-  $('#audGen')[0].play();
-  $('#btn_VolumenIndex, #btn_AudLoc').removeClass('hide');
+  numSlides = 16;
+  ctrl_slides();
 });
 
 $("#btn_start_slide15").click(function () {
   $("#mod_expertos_1").show();
   resetLocution();
-  playLocutionCarrusel(1)
+  playLocutionCarrusel(1);
   $("#btn_start_slide15").removeClass("myglow_img_blue");
+  numSlide1_2 = 1;
 });
 $("#cls_expertos_1").click(function () {
   $("#mod_expertos_1").hide();
+  numSlide1_2 = 1;
+  ctrl_avanceExp();
+  poke = true;
   $("#sini_Prev,#sini_Next").show();
-  resetLocutionSlide()
-  resetLocution()
+  resetLocutionSlide();
+  resetLocution();
+  console.log('en CLs', numSlide1_2);
 });
 
 function ctrl_avanceExp() {
@@ -243,14 +287,20 @@ function ctrl_avanceExp() {
   } else if (numSlide1_2 === 7) {
     $("#slide1_2_Prev,#cls_expertos_1").show();
     $("#slide1_2_Next").hide();
+  } else if (numSlide1_2 === 0) { // add this block to show the first slide on reset
+    numSlide1_2 = 1;
+    $("#slide1_2_Prev").hide();
+    $("#slide1_2_Next").show();
+    $("#carru_slide1_2_1").show();
+    $('#circ_slide1_2_1').removeClass('w3-white').addClass('w3-light-blue');
   } else {
     $("#slide1_2_Prev,#slide1_2_Next").show();
   }
-  if (numSlide1_2 === 1 || numSlide1_2 === 2 || numSlide1_2 === 3 || numSlide1_2 === 4 || numSlide1_2 === 5 || numSlide1_2 === 6 || numSlide1_2 === 7
-  ) {
-    playLocutionCarrusel(numSlide1_2)
+  if (numSlide1_2 >= 1 && numSlide1_2 <= 7) {
+    playLocutionCarrusel(numSlide1_2);
   }
 }
+
 function ctrl_avance_slide9(ptrId) {
   if ((avSlide9 < 2) && (avSlide9 <= ptrId)) {
     avSlide9 = ptrId + 1;
@@ -319,7 +369,7 @@ $("#btn_sabiasExp").click(function () {
 });
 $("#cls_sabiasExperto").click(function () {
   $('#sabias_expertos_1').hide();
-  $("#sab1")[0].pause()
+  $("#sab1")[0].pause();
 });
 
 //Cambiar para despues implementar carga de módulos
@@ -328,11 +378,11 @@ $('.btn_contInc').click(function () {
   if (strId === '1') {
     $("#gifavion").show();
     $("#aud_avion")[0].play();
-    setTimeout(function(){
+    setTimeout(function () {
       $("#gifavion").hide();
       numSlides = 9;
       ctrl_slides();
-    },3000) 
+    }, 3000);
   }
 });
 
@@ -341,12 +391,15 @@ $(".btn_navegacion").click(function () {
   $('.modal').hide();
   // resetLocution();
   strID = $(this).attr("id").split("_")[2];
-  "1" === strID && (numSlides = 10, $('#mod1_juego').hide().loadHTML('void.html'), $('html,body').css({ 'overflow-y': 'hidden' }));
-  "2" === strID && (numSlides = 16, $('#mod1_juego').hide().loadHTML('void.html'));
-  "3" === strID && (numSlides = 16, $('#mod1_juego').show().loadHTML('juego_1.html'));
-  "4" === strID && (numSlides = 17, $('#mod1_juego').hide().loadHTML('void.html'), $('html,body').css({ 'overflow-y': 'hidden' }));
-  "5" === strID && (numSlides = 20, $('#mod1_juego').hide().loadHTML('void.html'), $('html,body').css({ 'overflow-y': 'hidden' }));
+  "1" === strID && (numSlides = 11, $('#mod1_juego').hide().loadHTML('void.html'), $('html,body').css({ 'overflow-y': 'hidden' }));
+  "2" === strID && (numSlides = 15, $('#mod1_juego').hide().loadHTML('void.html'));
+  "3" === strID && (numSlides = 15, $('#mod1_juego').show().loadHTML('juego_1.html'));
+  "4" === strID && (numSlides = 16, $('#mod1_juego').hide().loadHTML('void.html'), $('html,body').css({ 'overflow-y': 'hidden' }));
   ctrl_slides();
+});
+$('#btn_Finish').click(function () {
+  setComplete();
+  exit_lms();
 });
 
 //Lucutar
@@ -361,91 +414,78 @@ function stopLocution2(e) {
 
 
 function resetLocution() {
-  //console.log("entra reset");
   var e = document.querySelectorAll(".locuIndex");
   [].forEach.call(e, function (e) {
     stopLocution(e);
-  })
+  });
 }
 function resetLocutionSlide() {
-  //console.log("entra reset");
   var e = document.querySelectorAll(".locuIndex");
   [].forEach.call(e, function (e) {
     stopLocution2(e);
-  })
+  });
 }
 function resetLocutionSabias() {
-  //console.log("entra reset");
   var e = document.querySelectorAll(".locuIndex");
   [].forEach.call(e, function (e) {
     stopLocution3(e);
-  })
+  });
 }
 function playLocution(currentSlide) {
-  console.log("entra playLocution"+ currentSlide);
   resetLocution();
-  if (currentSlide == 1) {
+  if (currentSlide === 1) {
     $("#aud_intro_1")[0].play();
   }
-  if (currentSlide == 2) {
+  if (currentSlide === 2) {
     $("#aud_intro_2")[0].play();
   }
-  if (currentSlide == 3) {
+  if (currentSlide === 3) {
     $("#aud_intro_3")[0].play();
   }
-  if (currentSlide == 4) {
+  if (currentSlide === 4) {
     $("#aud_intro_4")[0].play();
   }
-  if (currentSlide == 5) {
+  if (currentSlide === 5) {
     $("#aud_intro_5")[0].play();
   }
-  if (currentSlide == 6) {
+  if (currentSlide === 6) {
     $("#aud_intro_6")[0].play();
   }
-  if (currentSlide == 7) {
+  if (currentSlide === 7) {
     $("#aud_intro_7")[0].play();
   }
-  if (currentSlide == 9) {
+  if (currentSlide === 9) {
     $("#aud1")[0].play();
   }
-  if (currentSlide == 10) {
+  if (currentSlide === 10) {
     $("#aud2")[0].play();
   }
-  if (currentSlide == 11) {
+  if (currentSlide === 11) {
     $("#aud3")[0].play();
   }
-  if (currentSlide == 12) {
+  if (currentSlide === 12) {
     $("#aud4")[0].play();
   }
-  if (currentSlide == 13) {
+  if (currentSlide === 13) {
     $("#aud5")[0].play();
   }
-  if (currentSlide == 14) {
+  if (currentSlide === 14) {
     $("#aud6")[0].play();
   }
-  // if (currentSlide == 16) {
-  //   $("#aud7")[0].play();
-  // }
-  if (currentSlide == 16) {
+  if (currentSlide === 16) {
     $("#aud7")[0].play();
   }
-  if (currentSlide == 17) {
+  if (currentSlide === 17) {
     $("#aud8")[0].play();
   }
-  if (currentSlide == 18) {
-    $("#aud9")[0].play();
-  }
-  if (currentSlide == 19) {
+  if (currentSlide === 18) {
     $("#aud10")[0].play();
   }
-  if (currentSlide == 20) {
-    $("#aud11")[0].play();
-  }
-  
-
+  // if (currentSlide === 19) {
+  //   $("#aud10")[0].play();
+  // }
 }
 function playLocutionCarrusel(currentSlide) {
-  //console.log("entra playLocutionCarrusel");
   resetLocutionSlide();
   resetLocution();
   if (currentSlide == 1) {
@@ -470,3 +510,6 @@ function playLocutionCarrusel(currentSlide) {
     $("#acar7")[0].play();
   }
 }
+
+
+

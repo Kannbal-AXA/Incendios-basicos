@@ -363,9 +363,10 @@
 }
 .mod_btn_fin {
   position: absolute;
-  width: 10%;
-  left: 34%;
-  top: 36%;
+  width: 14%;
+  height: auto;
+  left: 32%;
+  top: 32%;
   cursor: pointer;
 }
 .mod_btn_try {
@@ -389,4 +390,14 @@
   right: 4%;
   font-size: 2.3vw;
   color: white;
+}
+.btnCerrarGameModal {
+  position: absolute;
+  width: 2.5%;
+  height: auto;
+  top: 3rem;
+  z-index: 1;
+  right: 42%;
+  cursor: pointer;
+  transition: 0.3s ease;
 }

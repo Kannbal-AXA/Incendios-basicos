@@ -27,8 +27,8 @@
   width: 23%;
 }
 .edificio_slide_2 {
-  right: 46.5%;
-  top: 20%;
+  right: 31.5%;
+  top: 63%;
   width: 8%;
 }
 
@@ -490,8 +490,8 @@
   cursor: pointer;
 }
 .sinie_end {
-  width: 55%;
-  top: 10%;
+  width: 43%;
+  top: 7%;
   left: 15%;
 }
 .inginia_end {
@@ -525,9 +525,9 @@
   top: 27%;
 }
 .demo_s19{
-  width: 40%;
-  left: 30%;
-  top: 63%;
+  width: 50%;
+  left: 10%;
+  bottom: 5%;
 }
 
 #btn_Finish{
@@ -560,9 +560,9 @@
 
 
 .btn_contInc{top:38%;width: 16%;}
-#btn_contInc_1{left: 43.4%;}
-#btn_contInc_2{left: 55.7%;pointer-events: none;}
-#btn_contInc_3{left: 68.2%;pointer-events: none;}
+#btn_contInc_1{left: 50.4%;}
+#btn_contInc_2{left: 62.7%;pointer-events: none;}
+#btn_contInc_3{left: 75.2%;pointer-events: none;}
 #btn_contInc_4{left: 81%;pointer-events: none;}
 
 .gif_mochila{position: absolute;left: 6%;width: 38%;bottom: 0%;}
