@@ -512,28 +512,40 @@
 .felicidades_s19 {
   width: 20%;
   top: 7%;
-  left: 40%;
+  left: 0;
+  right: 0;
+  margin: auto;
 }
 .obtuv_s19{
   width: 36%;
-  left: 32%;
   top: 19%;
+  left: 0;
+  right: 0;
+  margin: auto;
 }
 .insignia_19{
   width: 14%;
-  left: 43%;
+  /* left: 43%; */
   top: 27%;
+  left: 0;
+  right: 0;
+  margin: auto;
 }
 .demo_s19{
   width: 50%;
-  left: 10%;
-  bottom: 5%;
+  bottom: 19%;
+  left: 0;
+  right: 0;
+  margin: auto;
 }
 
 #btn_Finish{
   width: 15%;
-  left: 42%;
+  /* left: 42%; */
   bottom: 2%;
+  left: 0;
+  right: 0;
+  margin: auto;
 }
 
 #slide14_1 {
