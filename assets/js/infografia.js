@@ -83,126 +83,146 @@ var events = [
     "startPercent": 0.00015,
     "endPercent": 0.02,
     "audioElement": $("#audi1")[0],
-    "isPlayed": false
+    "isPlayed": false,
+    "volume": 1
   },
   {
     "startPercent": 0.02,
     "endPercent": 0.05,
     "audioElement": $("#audi2")[0],
-    "isPlayed": false
+    "isPlayed": false,
+    "volume": 1
   },
   {
     "startPercent": 0.05,
     "endPercent": 0.084,
     "audioElement": $("#audi3")[0],
-    "isPlayed": false
+    "isPlayed": false,
+    "volume": 1
   },
   {
     "startPercent": 0.084,
     "endPercent": 0.12,
     "audioElement": $("#audi4")[0],
-    "isPlayed": false
+    "isPlayed": false,
+    "volume": 1
   },
   {
     "startPercent": 0.12,
     "endPercent": 0.15,
     "audioElement": $("#audi5")[0],
-    "isPlayed": false
+    "isPlayed": false,
+    "volume": 1
   },
   {
-    "startPercent": 0.15,
+    "startPercent": 0.17,
     "endPercent": 0.19,
     "audioElement": $("#audi6")[0],
-    "isPlayed": false
+    "isPlayed": false,
+    "volume": 1
   },
   {
     "startPercent": 0.19,
     "endPercent": 0.291,
     "audioElement": $("#audi7")[0],
-    "isPlayed": false
+    "isPlayed": false,
+    "volume": 1
   },
   {
     "startPercent": 0.291,
     "endPercent": 0.33,
     "audioElement": $("#audi8")[0],
-    "isPlayed": false
+    "isPlayed": false,
+    "volume": 1
   },
   {
     "startPercent": 0.33,
     "endPercent": 0.40,
     "audioElement": $("#audi9")[0],
-    "isPlayed": false
+    "isPlayed": false,
+    "volume": 1
   },
   {
     "startPercent": 0.40,
     "endPercent": 0.47,
     "audioElement": $("#audi10")[0],
-    "isPlayed": false
+    "isPlayed": false,
+    "volume": 1
   },
   {
     "startPercent": 0.47,
     "endPercent": 0.53,
     "audioElement": $("#audi11")[0],
-    "isPlayed": false
+    "isPlayed": false,
+    "volume": 1
   },
   {
     "startPercent": 0.53,
     "endPercent": 0.61,
     "audioElement": $("#audi12")[0],
-    "isPlayed": false
+    "isPlayed": false,
+    "volume": 1
   },
   {
     "startPercent": 0.61,
     "endPercent": 0.66,
     "audioElement": $("#audi13")[0],
-    "isPlayed": false
+    "isPlayed": false,
+    "volume": 1
   },
   {
     "startPercent": 0.66,
     "endPercent": 0.70,
     "audioElement": $("#audi14")[0],
-    "isPlayed": false
+    "isPlayed": false,
+    "volume": 1
   },
   {
     "startPercent": 0.70,
     "endPercent": 0.76,
     "audioElement": $("#audi15")[0],
-    "isPlayed": false
+    "isPlayed": false,
+    "volume": 1
   },
   {
     "startPercent": 0.76,
     "endPercent": 0.84,
     "audioElement": $("#audi17")[0],
-    "isPlayed": false
+    "isPlayed": false,
+    "volume": 1
   },
   {
     "startPercent": 0.84,
     "endPercent": 0.89,
     "audioElement": $("#audi18")[0],
-    "isPlayed": false
+    "isPlayed": false,
+    "volume": 1
   },
   {
     "startPercent": 0.95,
     "endPercent": 0.99,
     "audioElement": $("#audi21")[0],
-    "isPlayed": false
+    "isPlayed": false,
+    "volume": 1
   },
   {
     "startPercent": 1,
     "endPercent": 1.1,
     "audioElement": $("#audi22")[0],
-    "isPlayed": false
+    "isPlayed": false,
+    "volume": 1
   }
 ];
 
 $(window).scroll(function () {
   var scrollPercent = $(window).scrollTop() / ($(document).height() - $(window).height());
   var audioToPlay = null;
-
+console.log(scrollPercent);
   events.forEach(function (event, index) {
     if (scrollPercent >= event.startPercent && scrollPercent < event.endPercent && !event.isPlayed) {
       audioToPlay = event.audioElement;
       event.isPlayed = true;
+      audioToPlay.volume = event.volume;
       $("audio").not(audioToPlay).not('#audBack, #audBack2, #audBack3, #aud7').each(function () {
         this.pause();
         this.currentTime = 0;
@@ -426,6 +446,7 @@ function taller_showDivs2(n) {
 $(".next_t").click(function () {
   resetLocutionInfo();
   $('#audi16')[0].play();
+  $('#audi16')[0].volume = 0.5;
 })
 
 $(".prev_t").click(function () {

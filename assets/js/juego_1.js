@@ -74,7 +74,6 @@ function validar_respuesta(param) {
             $("#mod_p1_bad").show();
             $(".s2_p1_e2").hide();
             $("#" + question + "_" + answer_selected).attr("src", "assets/img/parte_1/juego/pregunta-1/" + answer_selected + "_mal.png");
-            // nextQuestion(1, 5000);
         }
     }
 
@@ -92,7 +91,6 @@ function validar_respuesta(param) {
             $('#aud_error').get(0).play();
             $(".s2_p2_e2").hide();
             $("#" + question + "_" + answer_selected).attr("src", "assets/img/parte_1/juego/Pregunta-2/" + answer_selected + "_mal.png");
-            // nextQuestion(2, 5000);
         }
     }
 
@@ -110,7 +108,6 @@ function validar_respuesta(param) {
             $('#aud_error').get(0).play();
             $(".s2_p3_e2").hide();
             $("#" + question + "_" + answer_selected).attr("src", "assets/img/parte_1/juego/Pregunta-3/" + answer_selected + "_mal.png");
-            // nextQuestion(3, 5000);
         }
     }
 
@@ -128,7 +125,6 @@ function validar_respuesta(param) {
             $('#aud_error').get(0).play();
             $(".s2_p4_e2").hide();
             $("#" + question + "_" + answer_selected).attr("src", "assets/img/parte_1/juego/Pregunta-4/" + answer_selected + "_mal.png");
-            // nextQuestion(4, 5000);
 
         }
     }
@@ -147,7 +143,6 @@ function validar_respuesta(param) {
             $('#aud_error').get(0).play();
             $(".s2_p5_e2").hide();
             $("#" + question + "_" + answer_selected).attr("src", "assets/img/parte_1/juego/Pregunta-5/" + answer_selected + "_mal.png");
-            // nextQuestion(5, 5000);
         }
     }
 }
