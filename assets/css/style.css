@@ -357,3 +357,11 @@ body {
   top: 1.5rem;
   right: -4rem;
 }
+
+#myVideo {
+  width: 100%!important;
+  height: auto!important;
+  position: fixed;
+  left: 0;
+  top: -2rem;
+}
