@@ -483,8 +483,8 @@ function playLocution(currentSlide) {
     $("#aud8")[0].play();
   }
   if (currentSlide === 18) {
-    $("#aud10")[0].play();
-    $("#aud10")[0].volume = 0.6;
+    // $("#aud10")[0].play();
+    // $("#aud10")[0].volume = 0.6;
   }
   // if (currentSlide === 19) {
   //   $("#aud10")[0].play();
