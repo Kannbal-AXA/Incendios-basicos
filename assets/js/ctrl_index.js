@@ -16,7 +16,6 @@ $("#precache_index").waitForImages({
     ctrl_avanceExp();
     ctrl_avance_slide9(avSlide9);
     $('#btn_start_sini1').delay(3000).fadeIn();
-    $('#btn_openSide').show();
     $("#acar1")[0].pause();
     $("#acar1")[0].currentTime = 0;
     $('#audi16')[0].pause();
@@ -77,13 +76,16 @@ function ctrl_slides() {
   if (numSlides === 1) {
     $("#sini_Next").hide();
     $("#sini_Prev").hide();
+    $('#btn_openSide').hide().addClass('hide');
     playLocution(numSlides);
-  } else if (numSlides === 11) {
+  }
+  else if (numSlides === 11) {
     $("#sini_Next").hide();
     playLocution(numSlides);
   } else if (numSlides === 8) {
     $("#sini_Prev").show();
     $("#sini_Next").hide();
+    $('#btn_openSide').hide().addClass('hide');
   } else {
     $("#btn_VolumenIndex,#btn_AudLoc").show();
     $("#sini_Prev,#sini_Next").show();
@@ -135,6 +137,10 @@ function ctrl_slides() {
       $("#sini_Next").hide();
       playLocution(numSlides);
       reproducirVideo()
+    } else if (numSlides >= 9) {
+      $('#btn_openSide').show().removeClass('hide');
+    } else if (numSlides <= 8) {
+      $('#btn_openSide').hide().addClass('hide');
     }
   }
   unlock_menu();
