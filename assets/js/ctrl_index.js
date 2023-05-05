@@ -73,6 +73,7 @@ function ctrl_slides() {
   console.log('numSlides: ', numSlides);
   $(".slide_sini").hide();
   $("#slide_sini_" + numSlides).show();
+  detenerVideo()
   if (numSlides === 1) {
     $("#sini_Next").hide();
     $("#sini_Prev").hide();
@@ -133,6 +134,7 @@ function ctrl_slides() {
       $("#sini_Prev").show();
       $("#sini_Next").hide();
       playLocution(numSlides);
+      reproducirVideo()
     }
   }
   unlock_menu();
@@ -389,6 +391,7 @@ $('.btn_contInc').click(function () {
 $(".btn_navegacion").click(function () {
   $("#efct_clic")[0].play();
   $('.modal').hide();
+  detenerVideo();
   // resetLocution();
   strID = $(this).attr("id").split("_")[2];
   "1" === strID && (numSlides = 11, $('#mod1_juego').hide().loadHTML('void.html'), $('html,body').css({ 'overflow-y': 'hidden' }));
@@ -400,6 +403,7 @@ $(".btn_navegacion").click(function () {
 $('#btn_Finish').click(function () {
   setComplete();
   exit_lms();
+  detenerVideo()
 });
 
 //Lucutar
@@ -514,3 +518,42 @@ function playLocutionCarrusel(currentSlide) {
 
 
 
+// Obtener el elemento de video con jQuery
+var video = $("#myVideo")[0];
+
+// Esperar a que el video se cargue antes de intentar establecer currentTime
+$(video).on('loadedmetadata', function () {
+  // Desactivar los controles del video
+  video.controls = false;
+
+  // Desactivar el porcentaje de avance
+  $(video).on('timeupdate', function () {
+    var currentTime = video.currentTime;
+    var duration = video.duration;
+    var percent = (currentTime / duration) * 100;
+    if (!isNaN(percent)) {
+      $(video).css('background', 'linear-gradient(to right, #ddd ' + percent + '%, #fff ' + percent + '%)');
+    }
+  });
+
+  // Establecer currentTime a 5 segundos
+  video.currentTime = 0;
+});
+
+// Reproducir el video
+function reproducirVideo() {
+  video.play();
+}
+// Detener el video
+function stopVideo(e) {
+  e.pause();
+  e.currentTime = 0;
+}
+
+
+function detenerVideo() {
+  var e = document.querySelectorAll(".myVideo");
+  [].forEach.call(e, function (e) {
+    stopVideo(e);
+  });
+}
