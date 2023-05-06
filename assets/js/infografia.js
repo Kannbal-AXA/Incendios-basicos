@@ -21,11 +21,15 @@ var flag20 = 0;
 var flag21 = 0;
 var flag22 = 0;
 var flagbirds = 0;
-var flagMus = 1;
 var flagArea1 = false;
 var flagStop = false;
 
 var juego = false;
+
+// console.log("flagMusIndex "+ flagMusIndex);
+// if(flagMusIndex === 1 ){
+//     $("#btn_Volume").click();
+// }
 
 $('#bus').css('left', '500px');
 $('.etiqueta,.icono-Info,.edificio,#img_char_10,#mod_btn2_taller3,#mod_btn2_taller4').hide();
@@ -40,6 +44,7 @@ $('#mod1_juego').loadHTML('void.html');
 
 $('#btn_Volume').click(function () {
   if (flagMus === 0) {
+    console.log("musica prendida info")
     flagMus = 1;
     $('#btn_Volume').attr('src', 'assets/img/on.png');
     $('#audBack')[0].play();
@@ -47,6 +52,7 @@ $('#btn_Volume').click(function () {
     $('#audBack3')[0].play();
     $("#audBack")[0].volume = 0.3;
   } else if (flagMus === 1) {
+    console.log("musica apagada info")
     $('#btn_Volume').attr('src', 'assets/img/off.png');
     flagMus = 0;
     $('#audBack')[0].pause();
@@ -446,7 +452,7 @@ function taller_showDivs2(n) {
 $(".next_t").click(function () {
   resetLocutionInfo();
   $('#audi16')[0].play();
-  $('#audi16')[0].volume = 0.5;
+  // $('#audi16')[0].volume = 0.5;
 })
 
 $(".prev_t").click(function () {

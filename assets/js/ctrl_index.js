@@ -4,9 +4,11 @@ var flagPiso3Finish = false;
 var finishSlide12_1 = false;
 var sabias = 0;
 var flagMusIndex = 1;
+var flagMus = 1;
 var juego = false;
 let cb = false;
 let poke = false;
+let firstVideo = false;
 $("#acar1")[0].pause();
 $("#precache_index").waitForImages({
   finished: function () {
@@ -23,6 +25,7 @@ $("#precache_index").waitForImages({
   waitForAll: true
 });
 $('#btn_VolumenIndex').click(function () {
+  
   if (flagMusIndex === 0) {
     flagMusIndex = 1;
     $('#btn_VolumenIndex').attr('src', 'assets/img/on.png');
@@ -69,6 +72,12 @@ $(".da-clic").click(function () {
 $(".elem_close").click(function () { $("#efct_close")[0].play(); });
 
 function ctrl_slides() {
+  if (flagMusIndex == 1){
+    console.log("musica prendida");
+  }else{
+    console.log("musica apagada");
+  }
+
   console.log('numSlides: ', numSlides);
   $(".slide_sini").hide();
   $("#slide_sini_" + numSlides).show();
@@ -80,7 +89,9 @@ function ctrl_slides() {
     playLocution(numSlides);
   }
   else if (numSlides === 11) {
-    $("#sini_Next").hide();
+    if(!firstVideo){
+      $("#sini_Next").hide();
+    }
     playLocution(numSlides);
   } else if (numSlides === 8) {
     $("#sini_Prev").show();
@@ -105,6 +116,19 @@ function ctrl_slides() {
       $('#slide10_text_next').show();
       $('#slide10_text_prev,#slide10_text_3,#slide10_text_4,#slide10_text_5').hide();
       playLocution(numSlides);
+
+      // if (flagMus === 1) {
+      //   $('#btn_VolumenIndex').attr('src', 'assets/img/off.png');
+      //   flagMusIndex = 0;
+      //   $('#audGen')[0].pause();
+      //   $("#audGen")[0].volume = 0.3;
+      // }
+      // else{
+      //   $('#btn_VolumenIndex').attr('src', 'assets/img/on.png');
+      //   $('#audGen')[0].play();
+      //   $("#audGen")[0].volume = 0.3;
+      // }
+
     } else if (numSlides === 15) {
       cb = true;
       resetLocution();
@@ -121,7 +145,37 @@ function ctrl_slides() {
       $('#audBack3')[0].play();
       $("#audBack")[0].volume = 0.3;
       playLocution(numSlides);
+
+      if (flagMusIndex == 1){
+        console.log("musica prendida");
+        flagMus = 1;
+        $('#btn_Volume').attr('src', 'assets/img/on.png');
+        $('#audBack')[0].play();
+        $('#audBack2')[0].play();
+        $('#audBack3')[0].play();
+        $("#audBack")[0].volume = 0.3;
+      }else{
+        console.log("musica apagada");
+        $('#btn_Volume').attr('src', 'assets/img/off.png');
+        flagMus = 0;
+        $('#audBack')[0].pause();
+        $('#audBack2')[0].pause();
+        $('#audBack3')[0].pause();
+        $("#audBack")[0].volume = 0.3;
+      }
+      
     } else if (numSlides === 16) {
+      // if (flagMus === 1) {
+      //   $('#btn_VolumenIndex').attr('src', 'assets/img/off.png');
+      //   flagMusIndex = 0;
+      //   $('#audGen')[0].pause();
+      //   $("#audGen")[0].volume = 0.3;
+      // }
+      // else{
+      //   $('#btn_VolumenIndex').attr('src', 'assets/img/on.png');
+      //   $('#audGen')[0].play();
+      //   $("#audGen")[0].volume = 0.3;
+      // }
       $('#aud7')[0].play();
       $('#audBack')[0].pause();
       $('#audBack2')[0].pause();
@@ -228,6 +282,7 @@ $("#sini_Next").click(function () {
 
 //Botones slide intro AXA Incendios
 $('.video_slide_7').click(function () {
+  firstVideo = true;
   $('#mod_cultOrg').show();
   resetLocution();
   $('#audGen')[0].pause();
@@ -400,7 +455,7 @@ $(".btn_navegacion").click(function () {
   detenerVideo();
   // resetLocution();
   strID = $(this).attr("id").split("_")[2];
-  "1" === strID && (numSlides = 11, $('#mod1_juego').hide().loadHTML('void.html'), $('html,body').css({ 'overflow-y': 'hidden' }));
+  "1" === strID && (numSlides = 11, $('#mod1_juego').hide().loadHTML('void.html'), $('html,body').css({ 'overflow-y': 'hidden' }), $("#sini_Next").show(), $("#sini_Prev").show());
   "2" === strID && (numSlides = 15, $('#mod1_juego').hide().loadHTML('void.html'));
   "3" === strID && (numSlides = 15, $('#mod1_juego').show().loadHTML('juego_1.html'));
   "4" === strID && (numSlides = 16, $('#mod1_juego').hide().loadHTML('void.html'), $('html,body').css({ 'overflow-y': 'hidden' }));
