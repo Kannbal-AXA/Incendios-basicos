@@ -393,11 +393,11 @@
 }
 .btnCerrarGameModal {
   position: absolute;
-  width: 2.5%;
+  width: 2%;
   height: auto;
-  top: 3rem;
+  top: 5.8rem;
   z-index: 1;
-  right: 42%;
+  right: 46.5%;
   cursor: pointer;
   transition: 0.3s ease;
 }
