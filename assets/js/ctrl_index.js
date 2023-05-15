@@ -25,7 +25,7 @@ $("#precache_index").waitForImages({
   waitForAll: true
 });
 $('#btn_VolumenIndex').click(function () {
-  
+
   if (flagMusIndex === 0) {
     flagMusIndex = 1;
     $('#btn_VolumenIndex').attr('src', 'assets/img/on.png');
@@ -72,9 +72,9 @@ $(".da-clic").click(function () {
 $(".elem_close").click(function () { $("#efct_close")[0].play(); });
 
 function ctrl_slides() {
-  if (flagMusIndex == 1){
+  if (flagMusIndex == 1) {
     console.log("musica prendida");
-  }else{
+  } else {
     console.log("musica apagada");
   }
 
@@ -89,7 +89,9 @@ function ctrl_slides() {
     playLocution(numSlides);
   }
   else if (numSlides === 11) {
-    if(!firstVideo){
+    if (firstVideo === true) {
+      $("#sini_Next").show();
+    } else {
       $("#sini_Next").hide();
     }
     playLocution(numSlides);
@@ -146,7 +148,7 @@ function ctrl_slides() {
       $("#audBack")[0].volume = 0.3;
       playLocution(numSlides);
 
-      if (flagMusIndex == 1){
+      if (flagMusIndex == 1) {
         console.log("musica prendida");
         flagMus = 1;
         $('#btn_Volume').attr('src', 'assets/img/on.png');
@@ -154,7 +156,7 @@ function ctrl_slides() {
         $('#audBack2')[0].play();
         $('#audBack3')[0].play();
         $("#audBack")[0].volume = 0.3;
-      }else{
+      } else {
         console.log("musica apagada");
         $('#btn_Volume').attr('src', 'assets/img/off.png');
         flagMus = 0;
@@ -163,7 +165,7 @@ function ctrl_slides() {
         $('#audBack3')[0].pause();
         $("#audBack")[0].volume = 0.3;
       }
-      
+
     } else if (numSlides === 16) {
       // if (flagMus === 1) {
       //   $('#btn_VolumenIndex').attr('src', 'assets/img/off.png');
@@ -282,21 +284,23 @@ $("#sini_Next").click(function () {
 
 //Botones slide intro AXA Incendios
 $('.video_slide_7').click(function () {
-  firstVideo = true;
   $('#mod_cultOrg').show();
   resetLocution();
   $('#audGen')[0].pause();
   $('#vid_cultOrg').get(0).play();
-  $('#cls_cultOrg').click(function () {
-    $('#mod_cultOrg').hide();
-    $('#vid_cultOrg').get(0).pause();
-    $('#sini_Prev,#sini_Next').show();
-    if (flagMusIndex === 1) {
-      $('#audGen')[0].play();
-    } else {
-      $('#audGen')[0].pause();
-    }
-  });
+  firstVideo = true;
+});
+$('#cls_cultOrg').click(function () {
+  $('#mod_cultOrg').hide();
+  $('.video_slide_7').removeClass('animated pulse infinite');
+  $('#vid_cultOrg').get(0).pause();
+  if (flagMusIndex === 1) {
+    $('#audGen')[0].play();
+  } else {
+    $('#audGen')[0].pause();
+  }
+  ctrl_slides()
+  firstVideo = true;
 });
 
 $('#btn_start_sini1').click(function () {
@@ -455,10 +459,10 @@ $(".btn_navegacion").click(function () {
   detenerVideo();
   // resetLocution();
   strID = $(this).attr("id").split("_")[2];
-  "1" === strID && (numSlides = 11, $('#mod1_juego').hide().loadHTML('void.html'), $('html,body').css({ 'overflow-y': 'hidden' }), $("#sini_Next").show(), $("#sini_Prev").show());
-  "2" === strID && (numSlides = 15, $('#mod1_juego').hide().loadHTML('void.html'));
-  "3" === strID && (numSlides = 15, $('#mod1_juego').show().loadHTML('juego_1.html'));
-  "4" === strID && (numSlides = 16, $('#mod1_juego').hide().loadHTML('void.html'), $('html,body').css({ 'overflow-y': 'hidden' }));
+  "1" === strID && (numSlides = 11, $('#mod1_juego').hide().loadHTML('void.html'), $('html,body').css({ 'overflow-y': 'hidden' }), $("#sini_Next").show().css({'position': 'fixed'}), $("#sini_Prev").show().css({'position': 'fixed'})), $('html,body').css({ 'overflow-y': 'hidden' }), $("#mod_info_intro").hide(), $("#mod_info_intro").scrollTop(0);
+  "2" === strID && (numSlides = 15, $('#mod1_juego').hide().loadHTML('void.html')), $('html,body').css({ 'overflow-y': 'hidden' }), $("#mod_info_intro").hide(), $("#mod_info_intro").scrollTop(0);;
+  "3" === strID && (numSlides = 15, $('#mod1_juego').show().loadHTML('juego_1.html')), $('html,body').css({ 'overflow-y': 'hidden' }), $("#mod_info_intro").hide(), $("#mod_info_intro").scrollTop(0);;
+  "4" === strID && (numSlides = 16, $('#mod1_juego').hide().loadHTML('void.html'), $('html,body').css({ 'overflow-y': 'hidden' })), $('html,body').css({ 'overflow-y': 'hidden' }), $("#mod_info_intro").hide(), $("#mod_info_intro").scrollTop(0);;
   ctrl_slides();
 });
 $('#btn_Finish').click(function () {
@@ -586,7 +590,7 @@ var video = $("#myVideo")[0];
 $(video).on('loadedmetadata', function () {
   // Desactivar los controles del video
   video.controls = false;
-
+  video.volume = .6
   // Desactivar el porcentaje de avance
   $(video).on('timeupdate', function () {
     var currentTime = video.currentTime;
