@@ -193,6 +193,12 @@ function ctrl_slides() {
       $("#sini_Next").hide();
       playLocution(numSlides);
       reproducirVideo()
+      $('.btn_Finish')
+        .hide()
+        .delay(2000)
+        .fadeIn(0, function () {
+          $(this).addClass('animated infinite pulse');
+        });
     } else if (numSlides >= 9) {
       $('#btn_openSide').show().removeClass('hide');
     } else if (numSlides <= 8) {
