@@ -46,7 +46,7 @@ function unMuteMe_Locut(e) {
   e.muted = !1;
 }
 $(".btn_AudLoc").click(function () {
-  var e = document.querySelectorAll(".locuIndex");
+  var e = document.querySelectorAll(".locuIndex, .myVideo");
   0 === flagLocutionn ? (flagLocutionn = 1,
     $(".btn_AudLoc").attr("src", "assets/img/on_l.png"),
     [].forEach.call(e, function (e) {
